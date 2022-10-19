@@ -1,10 +1,13 @@
 // Shortest Seek Time First Algorithm
+
+// Calculate distance between track numbers
 function calculateDifference(HRJMIS_request, HRJMIS_headloc, HRJMIS_diff) {
     for (let HRJMIS_i = 0; HRJMIS_i<HRJMIS_diff.length; HRJMIS_i++) {
         HRJMIS_diff[HRJMIS_i][0] = Math.abs(HRJMIS_request[HRJMIS_i] - HRJMIS_headloc);
     }
 }
 
+// Find untouched track that has the smallest distance with the head
 function findMin (HRJMIS_diff) {
     let HRJMIS_index = -1;
     let HRJMIS_minimum = 999999999;
@@ -25,9 +28,9 @@ export default function sstfAlgorithm(HRJMIS_request, HRJMIS_headloc) {
     }
     
     let HRJMIS_len = HRJMIS_request.length;
-    let HRJMIS_diff = new Array();
+    let HRJMIS_diff = new Array(); // list that stores the distance between each track and the track pointed by the head
     let HRJMIS_seek_sequence = new Array(HRJMIS_len + 1);
-    let HRJMIS_seek_count = 0;
+    let HRJMIS_seek_count = 0; // total track movement
 
     for (let HRJMIS_i=0; HRJMIS_i<HRJMIS_len; HRJMIS_i++) {
         HRJMIS_diff.push([0,0])

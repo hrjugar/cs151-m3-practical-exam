@@ -1,15 +1,17 @@
 // SCAN Algorithm
 export default function scanAlgorithm(HRJMIS_arr, HRJMIS_head, HRJMIS_disk_size, HRJMIS_direction = "right") {
-    let HRJMIS_seek_count = 0;
+    let HRJMIS_seek_count = 0; // total track movement
     let HRJMIS_distance, HRJMIS_cur_track;
     let HRJMIS_left = [], HRJMIS_right = [];
-    let HRJMIS_seek_sequence = [];
+    let HRJMIS_seek_sequence = []; // list of all the tracks arranged based on the seek strategy
 
+    // include outermost tracks
     if (HRJMIS_direction == "left")
         HRJMIS_left.push(0);
     else if (HRJMIS_direction == "right")
         HRJMIS_right.push(HRJMIS_disk_size - 1);
 
+    // placing of tracks to the left and right lists based on their relative position to the head
     for (let HRJMIS_i = 0; HRJMIS_i < HRJMIS_arr.length; HRJMIS_i++) {
         if (HRJMIS_arr[HRJMIS_i] < HRJMIS_head)
             HRJMIS_left.push(HRJMIS_arr[HRJMIS_i]);
@@ -34,7 +36,7 @@ export default function scanAlgorithm(HRJMIS_arr, HRJMIS_head, HRJMIS_disk_size,
 
                 HRJMIS_head = HRJMIS_cur_track;
             }
-            HRJMIS_direction = "right";
+            HRJMIS_direction = "right"; // change direction
         }
         else if (HRJMIS_direction === "right") {
             for (let HRJMIS_i = 0; HRJMIS_i < HRJMIS_right.length; HRJMIS_i++) {
@@ -46,7 +48,7 @@ export default function scanAlgorithm(HRJMIS_arr, HRJMIS_head, HRJMIS_disk_size,
                 HRJMIS_seek_count += HRJMIS_distance;
                 HRJMIS_head = HRJMIS_cur_track;
             }
-            HRJMIS_direction = "left";
+            HRJMIS_direction = "left"; // change direction
         }
     }
 
