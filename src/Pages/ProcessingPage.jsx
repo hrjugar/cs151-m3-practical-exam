@@ -213,6 +213,12 @@ function OutputPart(HRJMIS_props) {
 
     const HRJMIS_positionCount = HRJMIS_ans.seekSequence.length + 1;
     const HRJMIS_positions = [HRJMIS_head, ...HRJMIS_ans.seekSequence];
+    HRJMIS_positions.forEach(function(HRJMIS_pos, HRJMIS_i) {
+        if(HRJMIS_i < HRJMIS_positions.length && HRJMIS_pos === HRJMIS_positions[HRJMIS_i + 1]) {
+          HRJMIS_positions.splice(HRJMIS_i, 1);
+        }
+    });
+
     const [HRJMIS_currentPosition, HRJMIS_setCurrentPosition] = useState(HRJMIS_positionCount);
     const [HRJMIS_graphData, HRJMIS_setGraphData] = useState([...HRJMIS_positions]);
     const HRJMIS_chartRef = useRef(null);
