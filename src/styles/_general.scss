@@ -1,0 +1,134 @@
+$bg-color: #ece9e0;
+$primary-color: #363437;
+$accent-color: #e5461e;
+
+@font-face {
+    font-family: Inter;
+    src: url("../fonts/Inter-Regular.ttf");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Inter;
+    src: url("../fonts/Inter-Medium.ttf");
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Inter;
+    src: url("../fonts/Inter-Bold.ttf");
+    font-weight: 700;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Inter, sans-serif;
+    color: $primary-color;
+}
+
+@mixin init-flex($direction, $gap, $justify-content: initial, $align-items: initial) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify-content;
+    align-items: $align-items;
+    gap: $gap; 
+}
+
+@mixin init-header-size($size-percentage) {
+    font-size: calc(clamp(1rem, 1rem + 1vw, 2rem) * ($size-percentage));
+    line-height: 120%;
+}
+
+@mixin init-plaintext-size($size-percentage) {
+    font-size: calc(clamp(0.7rem, 0.6rem + 0.5vw, 0.8rem) * ($size-percentage));
+}
+
+@mixin init-btn($bg-color, $text-color, $padding: 1rem 4rem) {
+    cursor: pointer;
+    background-color: $bg-color;
+    color: $text-color;
+    padding: $padding;
+}
+
+@mixin fit-viewport {
+    min-height: 100vh;
+    min-height: -moz-available;
+    min-height: -webkit-fill-available;
+    min-height: fill-available;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(359deg);
+    }
+}
+
+h1 {
+    @include init-header-size(2);
+}
+
+h2 {
+    @include init-header-size(1.5);
+}
+
+h3 {
+    @include init-header-size(1.25);
+}
+
+a, p, input, button {
+    @include init-plaintext-size(1.5);
+}
+
+a, ul, li {
+    text-decoration: none;
+}
+
+ul, li {
+    list-style: none;
+    list-style-type: none;
+}
+
+input[type=number] {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    border-bottom: 4px solid $primary-color;
+    -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+
+
+.no-show-mobile {
+    @include init-flex(column, normal, center, center);
+    position: absolute;
+    background-color: white;
+    text-align: center;
+    // background-color: $bg-color;
+    width: 100vw;
+    height: 100vh;
+    margin: auto;
+    z-index: 999;
+    padding-inline: 1rem;
+}
+
+.page {
+    min-height: 100vh;
+    background-color: $bg-color;
+}
+
+@media only screen and (min-width: "1024px") {
+    .no-show-mobile {
+        display: none;
+    }
+}

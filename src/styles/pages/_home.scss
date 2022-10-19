@@ -1,0 +1,136 @@
+@use '../general' as *;
+
+$border-width: 16px;
+
+.home {
+    @include init-flex(column, 4rem, flex-start, center);
+    position: relative;
+    padding: 4rem 6rem;
+    text-align: center;
+    overflow-y: hidden;
+
+    header {
+        @include init-flex(column, 0, center, center);
+        z-index: 2;
+        padding-bottom: 16rem;
+
+        h1 {
+            text-transform: uppercase;
+        }
+        
+        p {
+            font-weight: 500;
+        }
+    }
+
+    .start {
+        @include init-btn($bg-color, black, 2rem);
+        @include init-flex(column, 0, center, center);
+        position: absolute;
+        bottom: 2rem;
+        z-index: 1;
+        border-radius: 100%;
+        aspect-ratio: 1 / 1;
+        border: $border-width solid black;
+        font-weight: 900;
+        color: $primary-color;
+        transition: all 0.25s linear;
+
+        &:hover {
+            background-color: $primary-color;
+            color: $bg-color;
+        }
+    }
+
+    .disc-bg {
+        position: absolute;
+        z-index: 1;
+        bottom: -13rem;
+        width: 40rem;
+        aspect-ratio: 1 / 1;
+        border-radius: 100%;
+        background-color: $primary-color;
+    }
+
+    .disc-highlight, .disc-line {
+        aspect-ratio: 1 / 1;
+    }
+
+    .disc-highlight {
+        $disc-highlight-width: $border-width * 16;
+        position: absolute;
+        z-index: 1;
+        bottom: -13rem;
+        width: 40rem;
+        border-radius: 100%;
+        border-top: $disc-highlight-width solid $primary-color;
+        border-bottom: $disc-highlight-width solid $primary-color;
+        border-left: $disc-highlight-width solid transparent;
+        border-right: $disc-highlight-width solid transparent;
+        animation: 10s spin linear infinite;
+    }
+
+    .disc-outline {
+        position: absolute;
+        bottom: -13rem; // -40rem + 10rem;
+        z-index: 1;
+        width: 40rem;
+        aspect-ratio: 1 / 1;
+        border-radius: 100%;
+        border: $border-width solid black;
+    }
+
+    .disc-line {
+        $disc-line-width: $border-width / 2;
+        position: absolute;
+        z-index: 1;
+        border-radius: 100%;
+        border: $disc-line-width solid $bg-color;
+
+        &--1 {
+            bottom: 0.5rem;
+            width: 13rem;
+        }
+
+        &--2 {
+            bottom: -1rem;
+            width: 16rem;
+        }
+
+        &--3 {
+            bottom: -2.5rem;
+            width: 19rem;
+        }
+
+        &--4 {
+            bottom: -4rem;
+            width: 22rem;
+        }
+
+        &--5 {
+            bottom: -5.5rem;
+            width: 25rem;
+        }
+
+        &--6 {
+            bottom: -7rem;
+            width: 28rem;
+        }
+
+        &--7 {
+            bottom: -8.5rem;
+            width: 31rem;
+        }
+
+        &--8 {
+            bottom: -10rem;
+            width: 34rem;
+        }
+
+        &--9 {
+            bottom: -11.5rem;
+            width: 37rem;
+        }
+
+    }
+}

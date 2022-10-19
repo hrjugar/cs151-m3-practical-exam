@@ -1,0 +1,282 @@
+@use '../general' as *;
+
+.processing {
+    .input, .output  {
+        min-height: 100vh;
+        padding: 4rem 6rem 2rem;
+    }
+
+    .input {
+        @include init-flex(column, 2rem);
+    
+        .guide {
+            h3 {
+                text-transform: uppercase;
+            }
+        }
+
+        .choices {
+            @include init-flex(row, 2rem, flex-start, initial);
+            flex-wrap: wrap;
+            align-content: flex-start;
+
+            li {
+                @include init-flex(row, 1rem, flex-start, center);
+                @include init-header-size(1.0625);
+                flex: 0 1 25%;
+                cursor: pointer;
+                font-weight: 500;
+                border-bottom: 4px solid $primary-color;
+                padding: 1rem 4rem 1rem 0;
+                white-space: nowrap;
+
+                .dot {
+                    width: 1rem;
+                    height: 1rem;
+                    border-radius: 100%;
+                    border: 4px solid $primary-color;
+                    transition: all 0.1s linear;
+
+                    &--active {
+                        background-color: $primary-color;
+                    }
+                }
+            }
+        }
+
+        .disk-size {
+            @include init-header-size(5);
+            width: 20rem;
+            font-weight: 700;
+        }
+
+        .tracks-container {
+            @include init-flex(column, 1rem, initial, flex-start);
+
+            .tracks-error {
+                color: $accent-color;
+            }
+
+            .tracks {
+                @include init-flex(row, 1rem);
+                flex-wrap: wrap;
+                max-width: 90%;
+    
+                li {
+                    @include init-flex(column, 1rem, center, center);
+                    height: 4rem;
+                    padding: 4rem;
+                    aspect-ratio: 1 / 1;
+                    border-radius: 100%;
+                    border: 4px solid $primary-color;
+    
+                    & * {
+                        font-weight: 900;
+                    }
+    
+                    button {
+                        cursor: pointer;
+                        background-color: transparent;
+                        border: none;
+                    }
+    
+                    &.track {
+                        overflow: hidden;
+                        input {
+                            @include init-header-size(1.25);
+                            width: 6rem;
+                            text-align: center;
+                            border: none;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                        }
+    
+                        button {
+                            @include init-plaintext-size(1.5);
+    
+                            &:hover {
+                                animation: 0.3s spin linear;
+                            }
+                        }
+                    }
+    
+                    &.add {
+                        transition: all 0.1s linear;
+                        overflow: hidden;
+    
+                        button {
+                            @include init-header-size(1.5);
+                            aspect-ratio: 1 / 1;
+                            cursor: pointer;
+                            border: none;
+                            font-weight: 900;
+                        }
+    
+                        &:hover {
+                            background-color: $primary-color;
+        
+                            & * {
+                                color: $bg-color;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+        nav {
+            @include init-flex(row, 1rem, flex-end);
+            margin-top: auto;
+
+            a, button {
+                @include init-flex(column, 0, center, center);
+                cursor: pointer;
+                padding: 2rem;
+                aspect-ratio: 1 / 1;
+                border-radius: 100%;
+                font-weight: 900;
+                border: 4px solid $primary-color;
+                background-color: transparent;
+                color: $primary-color;
+                text-transform: uppercase;
+                transition: all 0.1s linear;
+
+                &:hover {
+                    background-color: $primary-color;
+                    color: $bg-color;
+                }
+            }
+        }
+    }
+
+    .output {
+        @include init-flex(column, 2rem);
+
+        .top {
+            @include init-flex(row, 2rem, space-between);
+
+            .left {
+                @include init-flex(column, 2rem);
+                flex-basis: 50%;
+    
+                header {
+                    @include init-flex(row, 1rem, space-between, flex-start);
+        
+                    .titles {
+                        .title {
+                            text-transform: uppercase;
+                        }
+        
+                        .subtitle {
+                            font-weight: 500;
+                        }
+                    }
+                }
+    
+                table {
+                    border-collapse: collapse;
+                    border: 4px solid $primary-color;
+                    width: fit-content;
+                    display: block;
+                    height: fit-content;
+                    overflow-y: auto;
+    
+                    tr {
+                        border: none;
+                    }
+
+                    .path {
+                        &--active {
+                            td {
+                                background-color: $primary-color;
+                                font-weight: 900;
+                                color: $bg-color;
+                            }
+                        }
+                    }
+    
+                    th, td {
+                        @include init-plaintext-size(1.5);
+                        padding: 1rem 2rem;
+                        text-align: center;
+                        vertical-align: middle;
+                    }
+    
+                    th {
+                        background-color: $primary-color;
+                        color: $bg-color;
+                        text-transform: uppercase;
+                        position: sticky;
+                        top: 0;
+                    }
+                }
+            }
+    
+            .right {
+                @include init-flex(column, 2rem, center, flex-end);                
+                width: 100%;
+
+                .steps {
+                    @include init-flex(row, 2rem, center, center);
+
+                    .arrow {
+                        $arrow-size: 1rem;
+                        cursor: pointer;
+                        width: 0;
+                        height: 0;
+                        border-top: $arrow-size solid transparent;
+                        border-bottom: $arrow-size solid transparent;
+
+                        &--left {
+                            border-right: $arrow-size solid $primary-color;
+                        }
+
+                        &--right {
+                            border-left: $arrow-size solid $primary-color;
+                        }
+                    }
+                }
+
+                .chart-container {
+                    width: 100%;
+                }
+            }            
+        }
+        
+        .bottom {
+            @include init-flex(row, 0, space-between, center);
+            margin-top: auto;
+
+            .stats {
+                @include init-flex(row, 4rem);
+                .stat {
+                    p {
+                        text-transform: uppercase;
+                        // font-weight: 500;
+                    }
+                }
+            }
+
+            nav {
+                button {
+                    cursor: pointer;
+                    padding: 2rem;
+                    aspect-ratio: 1 / 1;
+                    border-radius: 100%;
+                    font-weight: 900;
+                    border: 4px solid $primary-color;
+                    background-color: transparent;
+                    color: $primary-color;
+                    text-transform: uppercase;
+                    transition: all 0.1s linear;                 
+                    
+                    &:hover {
+                        background-color: $primary-color;
+                        color: $bg-color;
+                    }
+                }
+            }            
+        }
+    }
+}
